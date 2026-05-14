@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-green-primary: #4CAF50;
+  --color-green-light: #E8F5E9;
+  --color-green-dark: #388E3C;
+  --color-amber: #FFC107;
+  --color-red: #F44336;
+  --font-sans: "Hiragino Sans", "Noto Sans JP", sans-serif;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* iPhone notch / home indicator safe areas */
+.safe-bottom {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+.safe-top {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+.animate-spin-slow { animation: spin-slow 2s linear infinite; }
+.animate-pulse-dot { animation: pulse-dot 1.2s ease-in-out infinite; }
