@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
   const text = result.response.text();
   const jsonMatch = text.match(/\{[\s\S]*\}/);
   if (!jsonMatch) {
-    return NextResponse.json({ error: "Failed to parse AI response" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to parse AI response", raw: text.slice(0, 500) }, { status: 500 });
   }
 
   return NextResponse.json(JSON.parse(jsonMatch[0]));
