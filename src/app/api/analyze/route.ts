@@ -59,10 +59,11 @@ export async function POST(req: NextRequest) {
   });
 
   const text = result.response.text();
-  const jsonMatch = text.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
+  const codeBlock = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
+  const jsonStr = codeBlock ? codeBlock[1] : text.match(/\{[\s\S]*\}/)?.[0];
+  if (!jsonStr) {
     return NextResponse.json({ error: "Failed to parse AI response", raw: text.slice(0, 500) }, { status: 500 });
   }
 
-  return NextResponse.json(JSON.parse(jsonMatch[0]));
+  return NextResponse.json(JSON.parse(jsonStr));
 }
